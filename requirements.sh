@@ -1,2 +1,2 @@
 sudo apt-get update
-sudo apt-get -y -qq --fix-missing install python3-altair python3-numpy python3-pandas python3-vega_datasets python3-re
+sudo apt-get -y -qq --fix-missing install python-altair python-numpy python-pandas python-vega_datasets python-re
