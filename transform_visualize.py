@@ -3,7 +3,6 @@ import numpy as np
 import altair as alt
 from altair.expr import datum
 from vega_datasets import data
-import re
 import os
 
 def create_interactive_chart(bucket_name, folder_name):
