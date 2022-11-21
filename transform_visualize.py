@@ -7,7 +7,7 @@ import os
 import re
 import sys
 
-def create_interactive_chart(bucket_name):
+def create_interactive_chart():
   legislation = pd.read_csv('https://chronicdata.cdc.gov/api/views/nxst-x9p4/rows.csv?accessType=DOWNLOAD')
   activity = pd.read_csv('https://chronicdata.cdc.gov/api/views/hn4x-zwk7/rows.csv?accessType=DOWNLOAD')
   ansi = pd.read_csv('https://www2.census.gov/geo/docs/reference/state.txt', sep='|')
@@ -88,6 +88,13 @@ def create_interactive_chart(bucket_name):
   out.save('us-obesity.html')
   
 if __name__ == '__main__':
+  os.system('bash requirements.sh')
+  os.system('bash cdc_data.sh')
+  
   bucket_name = sys.argv[1]
-  create_interactive_chart(bucket_name)
+  create_interactive_chart()
+  
+  os.system('gsutil cp CDC_nutrition-legislation.csv gs://' + bucket_name + '/nutrition/')
+  os.system('gsutil cp CDC_nutrition-and-activity.csv gs://' + bucket_name + '/nutrition/')
+  os.system('gsutil cp us-obesity.html gs://' + bucket_name + '/nutrition/')
   
