@@ -85,13 +85,15 @@ def create_interactive_chart():
                 'Percent of Obese Adults']
   ).add_selection(
      hover)
-
-  base_scatter = alt.Chart(legislation_obesity).encode(
+ 
+  scatter_points = alt.Chart(legislation_obesity).mark_point().encode(
     alt.X('Number of Relevant Bills Enacted:Q'),
     alt.Y('Percent of Obese Adults:Q')
   )
-  scatter_points = base_scatter.mark_point()
-  scatter_line = base_scatter.mark_line()
+  scatter_line = alt.Chart(legislation_obesity).mark_line().encode(
+    alt.X('Number of Relevant Bills Enacted:Q'),
+    alt.Y('Percent of Obese Adults:Q')
+  )
   
   us_map = alt.layer(base, colors, points).resolve_scale(color = 'independent', size = 'independent')
   scattered = alt.layer(scatter_line, scatter_points)
