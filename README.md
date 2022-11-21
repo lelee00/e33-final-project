@@ -50,6 +50,7 @@ Instructions to use this code:
       * **Name:** *allUsers*
       * **Access:** *Reader*
       * **Save**
-
+      
+The visualization should now be published to https://storage.googleapis.com/[YOUR BUCKET NAME HERE]/nutrition/us-obesity.html !
 
       
