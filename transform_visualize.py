@@ -7,9 +7,9 @@ import os
 import re
 import sys
 
-def create_interactive_chart(bucket_name, folder_name):
-  activity = pd.read_csv('gs://' + bucket_name + '/' + 'nutrition/CDC_nutrition-and-activity.csv')
-  legislation = pd.read_csv('gs://' + bucket_name + '/' + 'nutrition/CDC_nutrition-legislation.csv')
+def create_interactive_chart(bucket_name):
+  activity = pd.read_csv('https://chronicdata.cdc.gov/api/views/nxst-x9p4/rows.csv?accessType=DOWNLOAD -O CDC_nutrition-legislation.csv')
+  legislation = pd.read_csv('https://chronicdata.cdc.gov/api/views/hn4x-zwk7/rows.csv?accessType=DOWNLOAD -O CDC_nutrition-and-activity.csv')
   ansi = pd.read_csv('https://www2.census.gov/geo/docs/reference/state.txt', sep='|')
   ansi.columns = ['id', 'abbr', 'LocationDesc', 'statens']
   ansi = ansi[['id', 'abbr', 'LocationDesc']]
@@ -88,6 +88,5 @@ def create_interactive_chart(bucket_name, folder_name):
   
 if __name__ == '__main__':
   bucket_name = sys.argv[1]
-  folder_name = sys.argv[2]
   create_interactive_chart(bucket_name, folder_name)
   
