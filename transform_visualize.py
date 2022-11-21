@@ -87,7 +87,7 @@ def create_interactive_chart(bucket_name, folder_name):
   out.save('us-obesity.html')
   
 if __name__ == '__main__':
-  bucket_name = sys.argv[0]
-  folder_name = sys.argv[1]
+  bucket_name = sys.argv[2]
+  folder_name = sys.argv[3]
   create_interactive_chart(bucket_name, folder_name)
   
