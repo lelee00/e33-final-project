@@ -33,7 +33,9 @@ def create_interactive_chart():
      columns = {'ProvisionID':'Number of Relevant Bills Enacted', 
                 'Data_Value':'Percent of Obese Adults','LocationDesc':'State'}
   )
-
+  
+  print(legislation_obesity.head())
+  
   legislation_obesity['lat'] = legislation_obesity.GeoLocation.apply(lambda x: float(re.sub('[()]','',x).split(', ')[0]))
   legislation_obesity['lon'] = legislation_obesity.GeoLocation.apply(lambda x: float(re.sub('[()]','',x).split(', ')[1]))
   
@@ -82,10 +84,16 @@ def create_interactive_chart():
                         ),
       tooltip = ['State',
                  'Number of Relevant Bills Enacted',
-                'Percent of Obese Adults']
+                 'Percent of Obese Adults']
   ).add_selection(
      hover)
  
+  
+  out = alt.layer(base, colors, points).resolve_scale(color = 'independent', size = 'independent')
+
+  
+  out.save('us-obesity.html')
+  
   scatter_points = alt.Chart(legislation_obesity).mark_point().encode(
     alt.X('Number of Relevant Bills Enacted:Q'),
     alt.Y('Percent of Obese Adults:Q')
@@ -94,14 +102,7 @@ def create_interactive_chart():
     alt.X('Number of Relevant Bills Enacted:Q'),
     alt.Y('Percent of Obese Adults:Q')
   )
-  
- 
   scattered = alt.layer(scatter_line, scatter_points)
-  
-  out = alt.layer(base, colors, points).resolve_scale(color = 'independent', size = 'independent')
-
-  
-  out.save('us-obesity.html')
   scattered.save('us-scatter.html')
   
   
