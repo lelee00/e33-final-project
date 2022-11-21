@@ -100,7 +100,7 @@ if __name__ == '__main__':
 #   os.system('bash requirements.sh')
   print('downloading data')
   data_download = os.system('bash cdc_data.sh')
-  print('saving data to cloud storage bucket)
+  print('saving data to cloud storage bucket')
   legislation_save = os.system('gsutil cp CDC_nutrition-legislation.csv gs://' + bucket_name + '/nutrition/')
   surv_save = os.system('gsutil cp CDC_nutrition-and-activity.csv gs://' + bucket_name + '/nutrition/')
   
