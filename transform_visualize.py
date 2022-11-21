@@ -35,6 +35,7 @@ def create_interactive_chart():
 
   legislation_obesity['lat'] = legislation_obesity.GeoLocation.apply(lambda x: float(re.sub('[()]','',x).split(', ')[0]))
   legislation_obesity['lon'] = legislation_obesity.GeoLocation.apply(lambda x: float(re.sub('[()]','',x).split(', ')[1]))
+  print(legislation_obesity.head())
   
   print('visualizing data...')
   
