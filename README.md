@@ -10,8 +10,12 @@ Instructions to use this code:
    
    **Instance settings**
    Name: *Your Choice*
+   
    Region: *Default*
+   
    Zone: *Default*
+   
    Boot Disk: *Change*
+   
       Version: *Debian GNU/Linux 10 (buster)*
       
