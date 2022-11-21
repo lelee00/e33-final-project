@@ -4,6 +4,7 @@ import altair as alt
 from altair.expr import datum
 from vega_datasets import data
 import os
+import re
 
 def create_interactive_chart(bucket_name, folder_name):
   activity = pd.read_csv('gs://' + bucket_name + '/' + folder_name + '/' + 'CDC_nutrition-and-activity.csv')
