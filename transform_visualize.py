@@ -30,12 +30,10 @@ def create_interactive_chart():
   ).merge(
       ansi
   ).rename(
-     columns = {'ProvisionID':'Number of Relevant Bills Enacted', 
+     columns = {'ProvisionID':'Number of Relevant Bills Proposed', 
                 'Data_Value':'Percent of Obese Adults','LocationDesc':'State'}
   )
-  
-  print(legislation_obesity.head())
-  
+
   legislation_obesity['lat'] = legislation_obesity.GeoLocation.apply(lambda x: float(re.sub('[()]','',x).split(', ')[0]))
   legislation_obesity['lon'] = legislation_obesity.GeoLocation.apply(lambda x: float(re.sub('[()]','',x).split(', ')[1]))
   
@@ -47,7 +45,7 @@ def create_interactive_chart():
                       fields=['lat', 'lon'])
 
   base = alt.Chart(states).mark_geoshape(fill = 'lightgrey', stroke = 'white').properties(
-     title='Obesity in the United States versus Related Legislature Enacted, 2011 - 2017',
+     title='Obesity in the United States versus Related Legislature Proposed, 2011 - 2017',
      width=650,
      height=400
   ).project('albersUsa')
@@ -73,26 +71,26 @@ def create_interactive_chart():
       longitude='lon:Q',
       latitude='lat:Q',
   ).mark_circle().encode(
-     color= alt.Color('Number of Relevant Bills Enacted:Q', 
+     color= alt.Color('Number of Relevant Bills Proposed:Q', 
                        scale = alt.Scale(scheme = 'redyellowgreen'), 
                        sort = 'ascending'
                      ),
      stroke = alt.value('white'),
      size=alt.condition(~hover, 
-                        'Number of Relevant Bills Enacted:Q', 
+                        'Number of Relevant Bills Proposed:Q', 
                         alt.value(1)
                         ),
       tooltip = ['State',
-                 'Number of Relevant Bills Enacted',
-                 'Percent of Obese Adults']
+                 'Number of Relevant Bills Proposed',
+                'Percent of Obese Adults']
   ).add_selection(
      hover)
- 
-  
-  out = alt.layer(base, colors, points).resolve_scale(color = 'independent', size = 'independent')
 
-  
+
+  out = alt.layer(base, colors, points).resolve_scale(color = 'independent', size = 'independent')
   out.save('us-obesity.html')
+  
+  
   
   scatter_points = alt.Chart(legislation_obesity).mark_point().encode(
     alt.X('Number of Relevant Bills Enacted:Q'),
