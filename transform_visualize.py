@@ -88,7 +88,7 @@ def create_interactive_chart():
     alt.Y('Percent of Obese Adults:Q'),
     tooltip = ['State', 'Number of Relevant Bills Enacted','Percent of Obese Adults'],
     size=alt.condition(~hover2,
-                        alt.value(3),
+                        alt.value(5),
                         alt.value(1))
   ).add_selection(hover2)
   
