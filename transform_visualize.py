@@ -90,7 +90,7 @@ def create_interactive_chart():
   out.save('us-obesity.html')
   
 if __name__ == '__main__':
-  os.system('bash requirements.sh')
+#   os.system('bash requirements.sh')
   os.system('bash cdc_data.sh')
   
   bucket_name = sys.argv[1]
