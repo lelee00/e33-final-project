@@ -92,7 +92,7 @@ def create_interactive_chart():
  
   scattered = alt.layer(scatter_line, scatter_points)
   map_us = alt.layer(base, colors, points).resolve_scale(color = 'independent', size = 'independent')
-  out = (map_us | scattered)
+  out = alt.vconcat(map_us, scattered)
   out.save('us-obesity.html')
 #   scattered.save('us-scatter.html')
   
