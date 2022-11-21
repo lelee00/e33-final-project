@@ -15,11 +15,12 @@ def create_interactive_chart():
   ansi = ansi[['id', 'abbr', 'LocationDesc']]
   
   print('transforming data...')
-  
-  legislation_obesity = legislation.groupby(
+  count_passed_bills = legislation[legislation.Status == 'Enacted'].groupby(
      ['LocationDesc','GeoLocation'])[['ProvisionID']].agg(
     'count'
-  ).reset_index().merge(
+  ).reset_index()
+  
+  legislation_obesity = count_passed_bills.merge(
      activity[(activity.Question == 'Percent of adults aged 18 years and older who have obesity') 
               & (activity.StratificationCategoryId1 == 'OVR')].groupby(
       ['LocationDesc']
