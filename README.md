@@ -1,2 +1,2 @@
-# e535-final-project
-Data and Code for E535 Final Project
+# i535-final-project
+Data and Code for I535 Final Project
