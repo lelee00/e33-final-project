@@ -100,16 +100,16 @@ if __name__ == '__main__':
 #   os.system('bash requirements.sh')
   bucket_name = sys.argv[1]
   print('downloading data')
-  data_download = os.system('bash cdc_data.sh restart >/dev/null')
+  data_download = os.system('bash cdc_data.sh')
   print('saving data to cloud storage bucket')
-  legislation_save = os.system('gsutil cp CDC_nutrition-legislation.csv gs://' + bucket_name + '/nutrition/ restart >/dev/null')
-  surv_save = os.system('gsutil cp CDC_nutrition-and-activity.csv gs://' + bucket_name + '/nutrition/ restart >/dev/null')
+  legislation_save = os.system('gsutil cp CDC_nutrition-legislation.csv gs://' + bucket_name + '/nutrition/')
+  surv_save = os.system('gsutil cp CDC_nutrition-and-activity.csv gs://' + bucket_name + '/nutrition/')
   
   
   create_interactive_chart()
   
   print('saving map visualization')
-  map_save = os.system('gsutil cp us-obesity.html gs://' + bucket_name + '/nutrition/ restart >/dev/null')
+  map_save = os.system('gsutil cp us-obesity.html gs://' + bucket_name + '/nutrition/')
   print('saving scatterplot')
-  scatter_save = os.system('gsutil cp us-scatter.html gs://' + bucket_name + '/nutrition/ restart >/dev/null')
+  scatter_save = os.system('gsutil cp us-scatter.html gs://' + bucket_name + '/nutrition/')
   
