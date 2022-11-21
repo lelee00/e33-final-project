@@ -13,6 +13,8 @@ Instructions to use this code:
       * **Zone:** *Default*  
       * **Boot Disk:** *Change*   
       * **Version:** *Debian GNU/Linux 10 (buster)*
+      * **Identity and API Access:**
+         * **Access Scopes:** *Allow full access to all cloud APIs*
       * **Create**
  3. When running, SSH into your newly created VM instance (select '**SSH**' next to the VM name)
  4. Run the following commands in the SSH shell:
