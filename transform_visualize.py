@@ -13,10 +13,11 @@ def create_interactive_chart(bucket_name):
   ansi = pd.read_csv('https://www2.census.gov/geo/docs/reference/state.txt', sep='|')
   ansi.columns = ['id', 'abbr', 'LocationDesc', 'statens']
   ansi = ansi[['id', 'abbr', 'LocationDesc']]
-
+  
+  print(legislation.columns.tolist())
+  
   legislation_obesity = legislation.groupby(
-     ['LocationDesc','GeoLocation']
-  )[['Citation']].agg(
+     ['LocationDesc','GeoLocation'])[['Citation']].agg(
     'count'
   ).reset_index().merge(
      activity[(activity.Question == 'Percent of adults aged 18 years and older who have obesity') 
