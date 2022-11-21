@@ -83,18 +83,18 @@ def create_interactive_chart():
   hover2 = alt.selection(type='single', on='mouseover', nearest=True,
                       fields=['Number of Relevant Bills Enacted', 'Percent of Obese Adults'])
  
-  scatter_points = alt.Chart(legislation_obesity).mark_point().encode(
-    alt.X('Number of Relevant Bills Enacted:Q'),
-    alt.Y('Percent of Obese Adults:Q')
-  )
-  scatter_line = alt.Chart(legislation_obesity).mark_line().encode(
+  scatter_points = alt.Chart(legislation_obesity).properties(title = 'Scatterplot of Number of Bills Enacted vs % of Obese Adults').mark_point().encode(
     alt.X('Number of Relevant Bills Enacted:Q'),
     alt.Y('Percent of Obese Adults:Q'),
     tooltip = ['State', 'Number of Relevant Bills Enacted','Percent of Obese Adults'],
-     size=alt.condition(~hover2,
+    size=alt.condition(~hover2,
                         alt.value(1),
                         alt.value(0))
   ).add_selection(hover2).interactive()
+  
+  scatter_line = alt.Chart(legislation_obesity).mark_line().encode(
+    alt.X('Number of Relevant Bills Enacted:Q'),
+    alt.Y('Percent of Obese Adults:Q'))
   
  
   scattered = alt.layer(scatter_line, scatter_points)
