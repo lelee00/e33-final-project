@@ -8,8 +8,8 @@ import re
 import sys
 
 def create_interactive_chart(bucket_name):
-  activity = pd.read_csv('https://chronicdata.cdc.gov/api/views/nxst-x9p4/rows.csv?accessType=DOWNLOAD')
-  legislation = pd.read_csv('https://chronicdata.cdc.gov/api/views/hn4x-zwk7/rows.csv?accessType=DOWNLOAD')
+  legislation = pd.read_csv('https://chronicdata.cdc.gov/api/views/nxst-x9p4/rows.csv?accessType=DOWNLOAD')
+  activity = pd.read_csv('https://chronicdata.cdc.gov/api/views/hn4x-zwk7/rows.csv?accessType=DOWNLOAD')
   ansi = pd.read_csv('https://www2.census.gov/geo/docs/reference/state.txt', sep='|')
   ansi.columns = ['id', 'abbr', 'LocationDesc', 'statens']
   ansi = ansi[['id', 'abbr', 'LocationDesc']]
