@@ -88,5 +88,5 @@ def create_interactive_chart(bucket_name):
   
 if __name__ == '__main__':
   bucket_name = sys.argv[1]
-  create_interactive_chart(bucket_name, folder_name)
+  create_interactive_chart(bucket_name)
   
