@@ -1,2 +1,2 @@
-# e33-final-project
-Data and Code for E533 Final Project
+# e535-final-project
+Data and Code for E535 Final Project
