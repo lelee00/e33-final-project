@@ -91,21 +91,24 @@ def create_interactive_chart():
   
  
   scattered = alt.layer(scatter_line, scatter_points)
-  map_us = alt.layer(base, colors, points).resolve_scale(color = 'independent', size = 'independent')
-  out = alt.vconcat(map_us, scattered)
+  out = alt.layer(base, colors, points).resolve_scale(color = 'independent', size = 'independent')
   out.save('us-obesity.html')
-#   scattered.save('us-scatter.html')
+  scattered.save('us-scatter.html')
   
   
 if __name__ == '__main__':
 #   os.system('bash requirements.sh')
-  os.system('bash cdc_data.sh')
+  print('downloading data')
+  data_download = os.system('bash cdc_data.sh')
+  print('saving data to cloud storage bucket)
+  legislation_save = os.system('gsutil cp CDC_nutrition-legislation.csv gs://' + bucket_name + '/nutrition/')
+  surv_save = os.system('gsutil cp CDC_nutrition-and-activity.csv gs://' + bucket_name + '/nutrition/')
   
   bucket_name = sys.argv[1]
   create_interactive_chart()
   
-  os.system('gsutil cp CDC_nutrition-legislation.csv gs://' + bucket_name + '/nutrition/')
-  os.system('gsutil cp CDC_nutrition-and-activity.csv gs://' + bucket_name + '/nutrition/')
-  os.system('gsutil cp us-obesity.html gs://' + bucket_name + '/nutrition/')
-#   os.system('gsutil cp us-scatter.html gs://' + bucket_name + '/nutrition/')
+  print('saving map visualization')
+  map_save = os.system('gsutil cp us-obesity.html gs://' + bucket_name + '/nutrition/')
+  print('saving scatterplot')
+  scatter_save = os.system('gsutil cp us-scatter.html gs://' + bucket_name + '/nutrition/')
   
