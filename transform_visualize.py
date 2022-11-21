@@ -15,12 +15,11 @@ def create_interactive_chart():
   ansi = ansi[['id', 'abbr', 'LocationDesc']]
   
   print('transforming data...')
-  count_passed_bills = legislation[legislation.Status == 'Enacted'].groupby(
+  
+  legislation_obesity = legislation.groupby(
      ['LocationDesc','GeoLocation'])[['ProvisionID']].agg(
     'count'
-  ).reset_index()
-  
-  legislation_obesity = count_passed_bills.merge(
+  ).reset_index().merge(
      activity[(activity.Question == 'Percent of adults aged 18 years and older who have obesity') 
               & (activity.StratificationCategoryId1 == 'OVR')].groupby(
       ['LocationDesc']
@@ -90,20 +89,6 @@ def create_interactive_chart():
   out = alt.layer(base, colors, points).resolve_scale(color = 'independent', size = 'independent')
   out.save('us-obesity.html')
   
-  
-  
-  scatter_points = alt.Chart(legislation_obesity).mark_point().encode(
-    alt.X('Number of Relevant Bills Enacted:Q'),
-    alt.Y('Percent of Obese Adults:Q')
-  )
-  scatter_line = alt.Chart(legislation_obesity).mark_line().encode(
-    alt.X('Number of Relevant Bills Enacted:Q'),
-    alt.Y('Percent of Obese Adults:Q')
-  )
-  scattered = alt.layer(scatter_line, scatter_points)
-  scattered.save('us-scatter.html')
-  
-  
 if __name__ == '__main__':
 #   os.system('bash requirements.sh')
   os.system('bash cdc_data.sh')
@@ -114,5 +99,4 @@ if __name__ == '__main__':
   os.system('gsutil cp CDC_nutrition-legislation.csv gs://' + bucket_name + '/nutrition/')
   os.system('gsutil cp CDC_nutrition-and-activity.csv gs://' + bucket_name + '/nutrition/')
   os.system('gsutil cp us-obesity.html gs://' + bucket_name + '/nutrition/')
-  os.system('gsutil cp us-scatter.html gs://' + bucket_name + '/nutrition/')
   
