@@ -30,7 +30,7 @@ def create_interactive_chart():
   ).merge(
       ansi
   ).rename(
-     columns = {'ProvisionID':'Number of Relevant Bills Proposed', 
+     columns = {'ProvisionID':'Number of Relevant Bills Enacted', 
                 'Data_Value':'Percent of Obese Adults','LocationDesc':'State'}
   )
 
@@ -45,7 +45,7 @@ def create_interactive_chart():
                       fields=['lat', 'lon'])
 
   base = alt.Chart(states).mark_geoshape(fill = 'lightgrey', stroke = 'white').properties(
-     title='Obesity in the United States versus Related Legislature Proposed, 2011 - 2017',
+     title='Obesity in the United States versus Related Legislature Enacted, 2011 - 2017',
      width=650,
      height=400
   ).project('albersUsa')
@@ -71,24 +71,34 @@ def create_interactive_chart():
       longitude='lon:Q',
       latitude='lat:Q',
   ).mark_circle().encode(
-     color= alt.Color('Number of Relevant Bills Proposed:Q', 
+     color= alt.Color('Number of Relevant Bills Enacted:Q', 
                        scale = alt.Scale(scheme = 'redyellowgreen'), 
                        sort = 'ascending'
                      ),
      stroke = alt.value('white'),
      size=alt.condition(~hover, 
-                        'Number of Relevant Bills Proposed:Q', 
+                        'Number of Relevant Bills Enacted:Q', 
                         alt.value(1)
                         ),
       tooltip = ['State',
-                 'Number of Relevant Bills Proposed',
+                 'Number of Relevant Bills Enacted',
                 'Percent of Obese Adults']
   ).add_selection(
      hover)
 
-
-  out = alt.layer(base, colors, points).resolve_scale(color = 'independent', size = 'independent')
+  base_scatter = alt.Chart(legislation_obesity).encode(
+    alt.X('Number of Relevant Bills Enacted:Q'),
+    alt.Y('Percent of Obese Adults:Q')
+  )
+  scatter_points = base_scatter.mark_point()
+  scatter_line = base_scatter.mark_line()
+  
+  us_map = alt.layer(base, colors, points).resolve_scale(color = 'independent', size = 'independent')
+  scattered = alt.layer(scatter_line, scatter_points)
+  out = alt.hconcat(us_map, scattered)
+  
   out.save('us-obesity.html')
+  
   
 if __name__ == '__main__':
 #   os.system('bash requirements.sh')
