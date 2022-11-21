@@ -14,7 +14,7 @@ def create_interactive_chart():
   ansi.columns = ['id', 'abbr', 'LocationDesc', 'statens']
   ansi = ansi[['id', 'abbr', 'LocationDesc']]
   
-  print(legislation.columns.tolist())
+  print('transforming data...')
   
   legislation_obesity = legislation.groupby(
      ['LocationDesc','GeoLocation'])[['Citation']].agg(
@@ -35,6 +35,8 @@ def create_interactive_chart():
 
   legislation_obesity['lat'] = legislation_obesity.GeoLocation.apply(lambda x: float(re.sub('[()]','',x).split(', ')[0]))
   legislation_obesity['lon'] = legislation_obesity.GeoLocation.apply(lambda x: float(re.sub('[()]','',x).split(', ')[1]))
+  
+  print('visualizing data...')
   
   alt.data_transformers.disable_max_rows()
   states = alt.topo_feature(data.us_10m.url,'states')
