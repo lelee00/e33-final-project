@@ -98,17 +98,18 @@ def create_interactive_chart():
   
 if __name__ == '__main__':
 #   os.system('bash requirements.sh')
-  print('downloading data')
-  data_download = os.system('bash cdc_data.sh')
-  print('saving data to cloud storage bucket')
-  legislation_save = os.system('gsutil cp CDC_nutrition-legislation.csv gs://' + bucket_name + '/nutrition/')
-  surv_save = os.system('gsutil cp CDC_nutrition-and-activity.csv gs://' + bucket_name + '/nutrition/')
-  
   bucket_name = sys.argv[1]
+  print('downloading data')
+  data_download = os.system('bash cdc_data.sh restart >/dev/null')
+  print('saving data to cloud storage bucket')
+  legislation_save = os.system('gsutil cp CDC_nutrition-legislation.csv gs://' + bucket_name + '/nutrition/ restart >/dev/null')
+  surv_save = os.system('gsutil cp CDC_nutrition-and-activity.csv gs://' + bucket_name + '/nutrition/ restart >/dev/null')
+  
+  
   create_interactive_chart()
   
   print('saving map visualization')
-  map_save = os.system('gsutil cp us-obesity.html gs://' + bucket_name + '/nutrition/')
+  map_save = os.system('gsutil cp us-obesity.html gs://' + bucket_name + '/nutrition/ restart >/dev/null')
   print('saving scatterplot')
-  scatter_save = os.system('gsutil cp us-scatter.html gs://' + bucket_name + '/nutrition/')
+  scatter_save = os.system('gsutil cp us-scatter.html gs://' + bucket_name + '/nutrition/ restart >/dev/null')
   
