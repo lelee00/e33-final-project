@@ -91,10 +91,10 @@ def create_interactive_chart():
   
  
   scattered = alt.layer(scatter_line, scatter_points)
-  out = alt.layer(base, colors, points).resolve_scale(color = 'independent', size = 'independent')
-  
+  map_us = alt.layer(base, colors, points).resolve_scale(color = 'independent', size = 'independent')
+  out = alt.hconcat(map_us, scattered)
   out.save('us-obesity.html')
-  scattered.save('us-scatter.html')
+#   scattered.save('us-scatter.html')
   
   
 if __name__ == '__main__':
@@ -107,5 +107,5 @@ if __name__ == '__main__':
   os.system('gsutil cp CDC_nutrition-legislation.csv gs://' + bucket_name + '/nutrition/')
   os.system('gsutil cp CDC_nutrition-and-activity.csv gs://' + bucket_name + '/nutrition/')
   os.system('gsutil cp us-obesity.html gs://' + bucket_name + '/nutrition/')
-  os.system('gsutil cp us-scatter.html gs://' + bucket_name + '/nutrition/')
+#   os.system('gsutil cp us-scatter.html gs://' + bucket_name + '/nutrition/')
   
