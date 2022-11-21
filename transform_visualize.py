@@ -17,7 +17,7 @@ def create_interactive_chart():
   print('transforming data...')
   
   legislation_obesity = legislation.groupby(
-     ['LocationDesc','GeoLocation'])[['Citation']].agg(
+     ['LocationDesc','GeoLocation'])[['ProvisionID']].agg(
     'count'
   ).reset_index().merge(
      activity[(activity.Question == 'Percent of adults aged 18 years and older who have obesity') 
@@ -29,7 +29,7 @@ def create_interactive_chart():
   ).merge(
       ansi
   ).rename(
-     columns = {'Citation':'Number of Relevant Bills Proposed', 
+     columns = {'ProvisionID':'Number of Relevant Bills Proposed', 
                 'Data_Value':'Percent of Obese Adults','LocationDesc':'State'}
   )
 
