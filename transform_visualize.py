@@ -1,7 +1,11 @@
+!pip install pandas
 import pandas as pd
+!pip install numpy
 import numpy as np
+!pip install altair
 import altair as alt
 from altair.expr import datum
+!pip install vega_datasets
 from vega_datasets import data
 import re
 import os
