@@ -7,8 +7,8 @@ import os
 import re
 
 def create_interactive_chart(bucket_name, folder_name):
-  activity = pd.read_csv('gs://' + bucket_name + '/' + folder_name + '/' + 'CDC_nutrition-and-activity.csv')
-  legislation = pd.read_csv('gs://' + bucket_name + '/' + folder_name + '/' + 'CDC_nutrition-legislation.csv')
+  activity = pd.read_csv('gs://' + bucket_name + '/' + 'nutrition/CDC_nutrition-and-activity.csv')
+  legislation = pd.read_csv('gs://' + bucket_name + '/' + 'nutrition/CDC_nutrition-legislation.csv')
   ansi = pd.read_csv('https://www2.census.gov/geo/docs/reference/state.txt', sep='|')
   ansi.columns = ['id', 'abbr', 'LocationDesc', 'statens']
   ansi = ansi[['id', 'abbr', 'LocationDesc']]
