@@ -97,7 +97,9 @@ def create_interactive_chart():
   
  
   scattered = alt.layer(scatter_line, scatter_points)
-  out = alt.layer(base, colors, points).resolve_scale(color = 'independent', size = 'independent')
+  
+  out = alt.layer(base, colors).resolve_scale(color = 'independent', size = 'independent')
+#   , points
   
   out.save('us-obesity.html')
   scattered.save('us-scatter.html')
