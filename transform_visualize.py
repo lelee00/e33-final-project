@@ -95,11 +95,12 @@ def create_interactive_chart():
     alt.Y('Percent of Obese Adults:Q')
   )
   
-  us_map = alt.layer(base, colors, points).resolve_scale(color = 'independent', size = 'independent')
+ 
   scattered = alt.layer(scatter_line, scatter_points)
-  out = alt.hconcat(us_map, scattered)
+  out = alt.layer(base, colors, points).resolve_scale(color = 'independent', size = 'independent')
   
   out.save('us-obesity.html')
+  scattered.save('us-scatter.html')
   
   
 if __name__ == '__main__':
