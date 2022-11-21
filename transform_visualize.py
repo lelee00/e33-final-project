@@ -5,6 +5,7 @@ from altair.expr import datum
 from vega_datasets import data
 import os
 import re
+import sys
 
 def create_interactive_chart(bucket_name, folder_name):
   activity = pd.read_csv('gs://' + bucket_name + '/' + 'nutrition/CDC_nutrition-and-activity.csv')
@@ -86,7 +87,7 @@ def create_interactive_chart(bucket_name, folder_name):
   out.save('us-obesity.html')
   
 if __name__ == '__main__':
-  bucket_name = os.sysdir[0]
-  folder_name = os.sysdir[1]
+  bucket_name = sys.argv[0]
+  folder_name = sys.argv[1]
   create_interactive_chart(bucket_name, folder_name)
   
